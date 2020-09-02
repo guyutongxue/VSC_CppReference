@@ -1,8 +1,8 @@
 {
     "name": "cpp-reference",
     "displayName": "Cpp Reference",
-    "description": "Search the std symbol on cppreference.com",
-    "version": "0.1.0",
+    "description": "View CppReference.com in VS Code",
+    "version": "0.1.1",
     "publisher": "Guyutongxue",
     "author": {
         "name": "Guyutongxue",
