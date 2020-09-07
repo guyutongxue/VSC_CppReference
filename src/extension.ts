@@ -6,41 +6,39 @@ import { linkMap } from './linkmap';
 
 export function activate(context: vscode.ExtensionContext) {
     let wvPanel: vscode.WebviewPanel | undefined = undefined;
-
-    context.subscriptions.push(
-        vscode.commands.registerCommand('cppref.open', async () => {
-            if (typeof(vscode.window.activeTextEditor) === "undefined" || vscode.window.activeTextEditor.document.languageId !== "cpp") return;
-            try {
-                if (wvPanel) {
-                    wvPanel.reveal(vscode.ViewColumn.Beside);
-                    wvPanel.webview.html = await getWvContent();
-                } else {
-                    let content: string = await getWvContent();
-                    wvPanel = vscode.window.createWebviewPanel(
-                        'docs',
-                        'C++ Reference',
-                        {
-                            viewColumn: vscode.ViewColumn.Beside,
-                            preserveFocus: false
-                        },
-                        {
-                            enableScripts: true,
-                            enableFindWidget: true,
-                            retainContextWhenHidden: true
-                        }
-                    );
-                    wvPanel.webview.html = content;
-                    wvPanel.onDidDispose(() => {
-                        wvPanel = undefined;
-                    }, null, context.subscriptions);
-                }
-            } catch (error) {
-                vscode.window.setStatusBarMessage("");
-                if ((error as Error).message != "")
-                    vscode.window.showInformationMessage((error as Error).message);
+    async function main(manually: boolean): Promise<void> {
+        try {
+            const content: string = await getWvContent(manually);
+            if (wvPanel) {
+                wvPanel.reveal(vscode.ViewColumn.Beside);
+            } else {
+                wvPanel = vscode.window.createWebviewPanel(
+                    'docs',
+                    'C++ Reference',
+                    {
+                        viewColumn: vscode.ViewColumn.Beside,
+                        preserveFocus: false
+                    },
+                    {
+                        enableScripts: true,
+                        enableFindWidget: true,
+                        retainContextWhenHidden: true
+                    }
+                );
+                wvPanel.onDidDispose(() => {
+                    wvPanel = undefined;
+                }, null, context.subscriptions);
             }
-        })
-    );
+            wvPanel.webview.html = content;
+        } catch (error) {
+            vscode.window.setStatusBarMessage("");
+            if ((error as Error).message != "")
+                vscode.window.showInformationMessage((error as Error).message);
+        }
+    }
+    const open = vscode.commands.registerCommand('cppref.open', () => { main(false); });
+    const search = vscode.commands.registerCommand('cppref.search', () => { main(true); });
+    context.subscriptions.push(open, search);
 }
 
 function getLink(): string {
@@ -63,7 +61,15 @@ function getCurrentWord(): string {
     }
 }
 
-
+async function searchManually(): Promise<string> {
+    const result = await vscode.window.showInputBox({
+        prompt: "Type what you want to search"
+    });
+    if (typeof (result) === "undefined")
+        throw new Error("");
+    else
+        return await getPathBySearch(result);
+}
 
 async function getPath(word: string): Promise<string> {
     interface Symbol {
@@ -124,7 +130,7 @@ async function getPathBySearch(word: string): Promise<string> {
                 ))
         ).then(json => {
             console.log(json);
-            let rawArr: {$: PageInfo}[] = json['api']['query'][0]['search'][0]['p'];
+            let rawArr: { $: PageInfo }[] = json['api']['query'][0]['search'][0]['p'];
             if (typeof rawArr === "undefined")
                 throw new Error("No result.");
             result = rawArr.map(i => i.$);
@@ -135,7 +141,7 @@ async function getPathBySearch(word: string): Promise<string> {
     }
     const selected = await vscode.window.showQuickPick<MyItem>(
         result.map<MyItem>(i => ({
-            label: i.titlesnippet.replace('&amp;','&').replace('&gt;','>').replace('&lt;','<').replace('&quot;','"'),
+            label: i.titlesnippet.replace('&amp;', '&').replace('&gt;', '>').replace('&lt;', '<').replace('&quot;', '"').replace('&quot;', '"'),
             path: encodeURI(i.title)
         })),
         {
@@ -147,12 +153,17 @@ async function getPathBySearch(word: string): Promise<string> {
     return selected.path;
 }
 
-async function getWvContent(): Promise<string> {
+async function getWvContent(manually: boolean): Promise<string> {
     const host: string = getLink();
     console.log("host: ", host);
-    const word = getCurrentWord();
-    console.log("word: ", word);
-    let link: string = host + (vscode.workspace.getConfiguration('cppref').get('useSearch') ? await getPathBySearch(word): await getPath(word));
+    let link: string = undefined;
+    if (manually) {
+        link = host + (await searchManually());
+    } else {
+        const word = getCurrentWord();
+        console.log("word: ", word);
+        link = host + (vscode.workspace.getConfiguration('cppref').get('useSearch') ? await getPathBySearch(word) : await getPath(word));
+    }
     console.log("final link: ", link);
     return `
 <!DOCTYPE html>

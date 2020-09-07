@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.1.3
+
+*2020.9.7*
+- New feature: search manually
+- Bug fixes
+
 ## 0.1.1
 
 *2020.9.2*

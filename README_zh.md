@@ -10,6 +10,12 @@
 
 ![](https://s1.ax1x.com/2020/09/02/w9nkKf.gif)
 
+你也可以手动搜索。按下 <kbd>Ctrl+Shift+P</kbd>（<kbd>Command+Shift+P</kbd>），随后输入 `Cpp Reference: Search manually` 即可。
+
+> 仅前 50 个搜索结果会被显示。
+>
+> C 语言相关的页面无法被搜索到。
+
 ## 选项
 
 ### `cppref.lang`

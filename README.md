@@ -12,6 +12,12 @@ Set your cursor position onto the word you want search for, then press <kbd>Ctrl
 
 ![](https://s1.ax1x.com/2020/09/02/w9nkKf.gif)
 
+You can also search manually by opening Command Palette (<kbd>Ctrl+Shift+P</kbd>, <kbd>Command+Shift+P</kbd>) and execute command `Cpp Reference: Search manually`.
+
+> Only the first 50 search results will be displayed.
+>
+> **Issue:** Pages about C language cannot be searched, because cppreference.com doesn't provide their search API.
+
 ## Settings
 
 ### `cppref.lang`
