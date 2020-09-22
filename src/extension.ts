@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import fetch from 'node-fetch';
 import xml2js = require('xml2js');
 
-import { linkMap } from './linkmap';
+import linkMap from './linkmap.json';
 
 export function activate(context: vscode.ExtensionContext) {
     let wvPanel: vscode.WebviewPanel | undefined = undefined;
