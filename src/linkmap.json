@@ -205,6 +205,12 @@
   },
   {
     "namespaceName": "std",
+    "name": "align_val_t",
+    "comment": null,
+    "path": "cpp/memory/new/align_val_t"
+  },
+  {
+    "namespaceName": "std",
     "name": "aligned_alloc",
     "comment": null,
     "path": "cpp/memory/c/aligned_alloc"
@@ -244,12 +250,6 @@
     "name": "alignment_of_v",
     "comment": null,
     "path": "cpp/types/alignment_of"
-  },
-  {
-    "namespaceName": "std",
-    "name": "align_val_t",
-    "comment": null,
-    "path": "cpp/memory/new/align_val_t"
   },
   {
     "namespaceName": "std",
@@ -667,25 +667,25 @@
   },
   {
     "namespaceName": "std",
-    "name": "atomic_int_fast8_t",
+    "name": "atomic_int_least8_t",
     "comment": null,
     "path": "cpp/atomic/atomic"
   },
   {
     "namespaceName": "std",
-    "name": "atomic_int_fast16_t",
+    "name": "atomic_int_least16_t",
     "comment": null,
     "path": "cpp/atomic/atomic"
   },
   {
     "namespaceName": "std",
-    "name": "atomic_int_fast32_t",
+    "name": "atomic_int_least32_t",
     "comment": null,
     "path": "cpp/atomic/atomic"
   },
   {
     "namespaceName": "std",
-    "name": "atomic_int_fast64_t",
+    "name": "atomic_int_least64_t",
     "comment": null,
     "path": "cpp/atomic/atomic"
   },
@@ -1360,6 +1360,12 @@
     "name": "basic_regex",
     "comment": null,
     "path": "cpp/regex/basic_regex"
+  },
+  {
+    "namespaceName": "std",
+    "name": "basic_stacktrace",
+    "comment": null,
+    "path": "cpp/utility/basic_stacktrace"
   },
   {
     "namespaceName": "std",
@@ -3571,6 +3577,12 @@
   },
   {
     "namespaceName": "std",
+    "name": "from_chars_result",
+    "comment": null,
+    "path": "cpp/utility/from_chars"
+  },
+  {
+    "namespaceName": "std",
     "name": "front_inserter",
     "comment": null,
     "path": "cpp/iterator/front_inserter"
@@ -3734,6 +3746,12 @@
   {
     "namespaceName": "std",
     "name": "get",
+    "comment": "std::ranges::subrange",
+    "path": "cpp/ranges/subrange/get"
+  },
+  {
+    "namespaceName": "std",
+    "name": "get",
     "comment": "std::tuple",
     "path": "cpp/utility/tuple/get"
   },
@@ -3784,6 +3802,12 @@
     "name": "get_time",
     "comment": null,
     "path": "cpp/io/manip/get_time"
+  },
+  {
+    "namespaceName": "std",
+    "name": "getline",
+    "comment": null,
+    "path": "cpp/string/basic_string/getline"
   },
   {
     "namespaceName": "std",
@@ -5212,6 +5236,18 @@
     "name": "is_scalar_v",
     "comment": null,
     "path": "cpp/types/is_scalar"
+  },
+  {
+    "namespaceName": "std",
+    "name": "is_scoped_enum",
+    "comment": null,
+    "path": "cpp/types/is_scoped_enum"
+  },
+  {
+    "namespaceName": "std",
+    "name": "is_scoped_enum_v",
+    "comment": null,
+    "path": "cpp/types/is_scoped_enum"
   },
   {
     "namespaceName": "std",
@@ -7089,13 +7125,13 @@
     "namespaceName": "std",
     "name": "nostopstate",
     "comment": null,
-    "path": "cpp/thread/stop_source"
+    "path": "cpp/thread/stop_source/nostopstate"
   },
   {
     "namespaceName": "std",
     "name": "nostopstate_t",
     "comment": null,
-    "path": "cpp/thread/stop_source"
+    "path": "cpp/thread/stop_source/nostopstate_t"
   },
   {
     "namespaceName": "std",
@@ -7921,6 +7957,12 @@
   },
   {
     "namespaceName": "std",
+    "name": "remove_if",
+    "comment": null,
+    "path": "cpp/algorithm/remove"
+  },
+  {
+    "namespaceName": "std",
     "name": "remove_all_extents",
     "comment": null,
     "path": "cpp/types/remove_all_extents"
@@ -8308,6 +8350,12 @@
     "name": "scoped_allocator_adaptor",
     "comment": null,
     "path": "cpp/memory/scoped_allocator_adaptor"
+  },
+  {
+    "namespaceName": "std",
+    "name": "scoped_lock",
+    "comment": null,
+    "path": "cpp/thread/scoped_lock"
   },
   {
     "namespaceName": "std",
@@ -8809,9 +8857,69 @@
   },
   {
     "namespaceName": "std",
+    "name": "stacktrace",
+    "comment": null,
+    "path": "cpp/utility/basic_stacktrace"
+  },
+  {
+    "namespaceName": "std",
+    "name": "stacktrace_entry",
+    "comment": null,
+    "path": "cpp/utility/stacktrace_entry"
+  },
+  {
+    "namespaceName": "std",
     "name": "static_pointer_cast",
     "comment": null,
     "path": "cpp/memory/shared_ptr/pointer_cast"
+  },
+  {
+    "namespaceName": "std",
+    "name": "stod",
+    "comment": null,
+    "path": "cpp/string/basic_string/stof"
+  },
+  {
+    "namespaceName": "std",
+    "name": "stof",
+    "comment": null,
+    "path": "cpp/string/basic_string/stof"
+  },
+  {
+    "namespaceName": "std",
+    "name": "stoi",
+    "comment": null,
+    "path": "cpp/string/basic_string/stol"
+  },
+  {
+    "namespaceName": "std",
+    "name": "stol",
+    "comment": null,
+    "path": "cpp/string/basic_string/stol"
+  },
+  {
+    "namespaceName": "std",
+    "name": "stold",
+    "comment": null,
+    "path": "cpp/string/basic_string/stof"
+  },
+  {
+    "namespaceName": "std",
+    "name": "stoll",
+    "comment": null,
+    "path": "cpp/string/basic_string/stol"
+  },
+  {
+    "namespaceName": "std",
+    "name": "stoul",
+    "comment": null,
+    "path": "cpp/string/basic_string/stoul"
+  },
+  {
+    "namespaceName": "std",
+    "name": "stoull",
+    "comment": null,
+    "path": "cpp/string/basic_string/stoul"
   },
   {
     "namespaceName": "std",
@@ -9391,6 +9499,12 @@
   },
   {
     "namespaceName": "std",
+    "name": "to_chars_result",
+    "comment": null,
+    "path": "cpp/utility/to_chars"
+  },
+  {
+    "namespaceName": "std",
     "name": "to_integer",
     "comment": null,
     "path": "cpp/types/byte"
@@ -9400,6 +9514,12 @@
     "name": "to_string",
     "comment": null,
     "path": "cpp/string/basic_string/to_string"
+  },
+  {
+    "namespaceName": "std",
+    "name": "to_wstring",
+    "comment": null,
+    "path": "cpp/string/basic_string/to_wstring"
   },
   {
     "namespaceName": "std",
@@ -9436,6 +9556,12 @@
     "name": "toupper",
     "comment": "locale",
     "path": "cpp/locale/toupper"
+  },
+  {
+    "namespaceName": "std",
+    "name": "to_underlying",
+    "comment": null,
+    "path": "cpp/utility/to_underlying"
   },
   {
     "namespaceName": "std",
@@ -9536,6 +9662,12 @@
   {
     "namespaceName": "std",
     "name": "tuple_element",
+    "comment": null,
+    "path": "cpp/utility/tuple_element"
+  },
+  {
+    "namespaceName": "std",
+    "name": "tuple_element",
     "comment": "std::array",
     "path": "cpp/container/array/tuple_element"
   },
@@ -9548,8 +9680,26 @@
   {
     "namespaceName": "std",
     "name": "tuple_element",
+    "comment": "std::ranges::subrange",
+    "path": "cpp/ranges/subrange/tuple_element"
+  },
+  {
+    "namespaceName": "std",
+    "name": "tuple_element",
     "comment": "std::tuple",
     "path": "cpp/utility/tuple/tuple_element"
+  },
+  {
+    "namespaceName": "std",
+    "name": "tuple_element_t",
+    "comment": null,
+    "path": "cpp/utility/tuple_element"
+  },
+  {
+    "namespaceName": "std",
+    "name": "tuple_size",
+    "comment": null,
+    "path": "cpp/utility/tuple_size"
   },
   {
     "namespaceName": "std",
@@ -9566,8 +9716,20 @@
   {
     "namespaceName": "std",
     "name": "tuple_size",
+    "comment": "std::ranges::subrange",
+    "path": "cpp/ranges/subrange/tuple_size"
+  },
+  {
+    "namespaceName": "std",
+    "name": "tuple_size",
     "comment": "std::tuple",
     "path": "cpp/utility/tuple/tuple_size"
+  },
+  {
+    "namespaceName": "std",
+    "name": "tuple_size_v",
+    "comment": null,
+    "path": "cpp/utility/tuple_size"
   },
   {
     "namespaceName": "std",
@@ -10947,7 +11109,7 @@
     "namespaceName": "std::chrono",
     "name": "is_am",
     "comment": null,
-    "path": "cpp/chrono/hour fun"
+    "path": "cpp/chrono/hour_fun"
   },
   {
     "namespaceName": "std::chrono",
@@ -10965,7 +11127,7 @@
     "namespaceName": "std::chrono",
     "name": "is_pm",
     "comment": null,
-    "path": "cpp/chrono/hour fun"
+    "path": "cpp/chrono/hour_fun"
   },
   {
     "namespaceName": "std::chrono",
@@ -11049,13 +11211,13 @@
     "namespaceName": "std::chrono",
     "name": "make12",
     "comment": null,
-    "path": "cpp/chrono/hour fun"
+    "path": "cpp/chrono/hour_fun"
   },
   {
     "namespaceName": "std::chrono",
     "name": "make24",
     "comment": null,
-    "path": "cpp/chrono/hour fun"
+    "path": "cpp/chrono/hour_fun"
   },
   {
     "namespaceName": "std::chrono",
@@ -12499,6 +12661,12 @@
   },
   {
     "namespaceName": "std::ranges",
+    "name": "get",
+    "comment": "std::ranges::subrange",
+    "path": "cpp/ranges/subrange/get"
+  },
+  {
+    "namespaceName": "std::ranges",
     "name": "greater",
     "comment": null,
     "path": "cpp/utility/functional/ranges/greater"
@@ -12514,6 +12682,42 @@
     "name": "includes",
     "comment": null,
     "path": "cpp/algorithm/ranges/includes"
+  },
+  {
+    "namespaceName": "std::ranges",
+    "name": "in_found_result",
+    "comment": null,
+    "path": "cpp/algorithm/ranges/return_types/in_found_result"
+  },
+  {
+    "namespaceName": "std::ranges",
+    "name": "in_fun_result",
+    "comment": null,
+    "path": "cpp/algorithm/ranges/return_types/in_fun_result"
+  },
+  {
+    "namespaceName": "std::ranges",
+    "name": "in_in_out_result",
+    "comment": null,
+    "path": "cpp/algorithm/ranges/return_types/in_in_out_result"
+  },
+  {
+    "namespaceName": "std::ranges",
+    "name": "in_in_result",
+    "comment": null,
+    "path": "cpp/algorithm/ranges/return_types/in_in_result"
+  },
+  {
+    "namespaceName": "std::ranges",
+    "name": "in_out_out_result",
+    "comment": null,
+    "path": "cpp/algorithm/ranges/return_types/in_out_out_result"
+  },
+  {
+    "namespaceName": "std::ranges",
+    "name": "in_out_result",
+    "comment": null,
+    "path": "cpp/algorithm/ranges/return_types/in_out_result"
   },
   {
     "namespaceName": "std::ranges",
@@ -12670,6 +12874,12 @@
     "name": "minmax_element",
     "comment": null,
     "path": "cpp/algorithm/ranges/minmax_element"
+  },
+  {
+    "namespaceName": "std::ranges",
+    "name": "min_max_result",
+    "comment": null,
+    "path": "cpp/algorithm/ranges/return_types/min_max_result"
   },
   {
     "namespaceName": "std::ranges",
@@ -13029,7 +13239,7 @@
     "namespaceName": "std::ranges",
     "name": "subrange",
     "comment": null,
-    "path": "cpp/algorithm/ranges/subrange"
+    "path": "cpp/ranges/subrange"
   },
   {
     "namespaceName": "std::ranges",

@@ -100,8 +100,8 @@ async function getPath(word: string): Promise<string> {
                 description: e.comment == null ? "" : e.comment,
                 index: i
             })), {
-            canPickMany: false
-        }
+                canPickMany: false
+            }
         ));
         if (typeof result === "undefined") throw new Error("");
         path = matches[result.index].path;
