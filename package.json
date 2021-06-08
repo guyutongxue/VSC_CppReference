@@ -2,7 +2,7 @@
     "name": "cpp-reference",
     "displayName": "Cpp Reference",
     "description": "View CppReference.com in VS Code",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "publisher": "Guyutongxue",
     "author": {
         "name": "Guyutongxue",
@@ -99,9 +99,19 @@
                     "cppref.alternative.url": {
                         "type": "string",
                         "title": "Alternative URL",
-                        "format": "uri",
                         "description": "Write your alternative cppreference.com base URL here, like `https://guyutongxue.gitee.io/cppref/zh/`.",
                         "default": ""
+                    },
+                    "cppref.searchEngine": {
+                        "type": "string",
+                        "title": "Search engine",
+                        "description": "Use which search engine when no result matches your query word.",
+                        "enum": [
+                            "Google",
+                            "Bing",
+                            "Baidu"
+                        ],
+                        "default": "Bing"
                     }
                 }
             }

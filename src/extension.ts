@@ -62,13 +62,24 @@ function getCurrentWord(): string {
 }
 
 async function searchManually(): Promise<string> {
-    const result = await vscode.window.showInputBox({
+    const word = await vscode.window.showInputBox({
         prompt: "Type what you want to search"
     });
-    if (typeof (result) === "undefined")
+    if (typeof (word) === "undefined")
         throw new Error("");
     else
-        return await getPathBySearch(result);
+        return word;
+}
+
+function getSearchEnginePath(word: string) {
+    const encodedWord = encodeURIComponent("site:cppreference.com " + word);
+    type SearchEngineEnum = "Google" | "Bing" | "Baidu";
+    const searchEngine: SearchEngineEnum = vscode.workspace.getConfiguration('cppref').get('searchEngine');
+    switch (searchEngine) {
+        case "Google": return `https://guyutongxue.github.io/VSC_CppReference/gcse-forward.html?q=${encodeURIComponent(word)}`;
+        case "Bing": return `https://www.bing.com/search?q=${encodedWord}`;
+        case "Baidu": return `https://www.baidu.com/s?wd=${encodedWord}`;
+    }
 }
 
 async function getPath(word: string): Promise<string> {
@@ -85,9 +96,6 @@ async function getPath(word: string): Promise<string> {
             matches.push(linkMap[i]);
         }
     }
-    if (matches.length == 0) {
-        throw new Error("No matched symbol found.");
-    }
     if (matches.length == 1) {
         path = matches[0].path;
     } else {
@@ -95,16 +103,25 @@ async function getPath(word: string): Promise<string> {
             index: number;
         }
         const result = (await vscode.window.showQuickPick<MyItem>(
-            matches.map<MyItem>((e, i) => ({
-                label: e.namespaceName + "::" + e.name,
-                description: e.comment == null ? "" : e.comment,
-                index: i
-            })), {
-                canPickMany: false
-            }
+            [
+                ...matches.map<MyItem>((e, i) => ({
+                    label: e.namespaceName + "::" + e.name,
+                    description: e.comment == null ? "" : e.comment,
+                    index: i
+                })),
+                {
+                    label: 'More results provided by search engine...',
+                    index: null
+                }
+            ], {
+            canPickMany: false
+        }
         ));
         if (typeof result === "undefined") throw new Error("");
-        path = matches[result.index].path;
+        if (result.index !== null)
+            path = matches[result.index].path;
+        else
+            path = null;
     }
     return path;
 }
@@ -119,7 +136,7 @@ async function getPathBySearch(word: string): Promise<string> {
         path: string
     };
     vscode.window.setStatusBarMessage("Searching cppreference.com...");
-    let result: PageInfo[] = undefined;
+    let result: PageInfo[] = [];
     await fetch(`https://en.cppreference.com/mwiki/api.php?action=query&list=search&srsearch=${encodeURI(word)}&format=xml&srlimit=50&srprop=titlesnippet`)
         .then(response => response.text())
         .then(str => new Promise(
@@ -131,19 +148,24 @@ async function getPathBySearch(word: string): Promise<string> {
         ).then(json => {
             console.log(json);
             let rawArr: { $: PageInfo }[] = json['api']['query'][0]['search'][0]['p'];
-            if (typeof rawArr === "undefined")
-                throw new Error("No result.");
-            result = rawArr.map(i => i.$);
+            if (typeof rawArr !== "undefined")
+                result = rawArr.map(i => i.$);
         })
     vscode.window.setStatusBarMessage("");
     if (result.length == 1) {
         return encodeURI(result[0].title);
     }
     const selected = await vscode.window.showQuickPick<MyItem>(
-        result.map<MyItem>(i => ({
-            label: i.titlesnippet.replace('&amp;', '&').replace('&gt;', '>').replace('&lt;', '<').replace('&quot;', '"').replace('&quot;', '"'),
-            path: encodeURI(i.title)
-        })),
+        [
+            ...result.map<MyItem>(i => ({
+                label: i.titlesnippet.replace('&amp;', '&').replace('&gt;', '>').replace('&lt;', '<').replace('&quot;', '"').replace('&quot;', '"'),
+                path: encodeURI(i.title)
+            })),
+            {
+                label: 'More results provided by search engine...',
+                path: null
+            }
+        ],
         {
             canPickMany: false
         }
@@ -155,16 +177,18 @@ async function getPathBySearch(word: string): Promise<string> {
 
 async function getWvContent(manually: boolean): Promise<string> {
     const host: string = getLink();
+    let path: string;
     console.log("host: ", host);
     let link: string = undefined;
-    if (manually) {
-        link = host + (await searchManually());
+    const word = manually ? await searchManually() : getCurrentWord();
+    console.log("word: ", word);
+    path = (vscode.workspace.getConfiguration('cppref').get('useSearch') ? await getPathBySearch(word) : await getPath(word));
+    if (path !== null) {
+        link = host + path;
+        console.log("final link: ", link);
     } else {
-        const word = getCurrentWord();
-        console.log("word: ", word);
-        link = host + (vscode.workspace.getConfiguration('cppref').get('useSearch') ? await getPathBySearch(word) : await getPath(word));
+        link = getSearchEnginePath(word);
     }
-    console.log("final link: ", link);
     return `
 <!DOCTYPE html>
 <html>
@@ -191,4 +215,4 @@ async function getWvContent(manually: boolean): Promise<string> {
 <iframe src="${link}" width="100%" height="100%" ></iframe>
 </body>
 </html>`;
-} 
+}
