@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.1.6
+
+*2020.6.19*
+- Breaking change: search engine result will be open in browser instead of VSCode webview.
+- New search engine: DuckDuckGo
+
 ## 0.1.5
 
 *2021.6.8*

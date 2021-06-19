@@ -109,6 +109,7 @@
                         "enum": [
                             "Google",
                             "Bing",
+                            "DuckDuckGo",
                             "Baidu"
                         ],
                         "default": "Bing"

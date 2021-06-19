@@ -73,10 +73,11 @@ async function searchManually(): Promise<string> {
 
 function getSearchEnginePath(word: string) {
     const encodedWord = encodeURIComponent("site:cppreference.com " + word);
-    type SearchEngineEnum = "Google" | "Bing" | "Baidu";
+    type SearchEngineEnum = "Google" | "Bing" | "DuckDuckGo" | "Baidu";
     const searchEngine: SearchEngineEnum = vscode.workspace.getConfiguration('cppref').get('searchEngine');
     switch (searchEngine) {
-        case "Google": return `https://guyutongxue.github.io/VSC_CppReference/gcse-forward.html?q=${encodeURIComponent(word)}`;
+        case "DuckDuckGo": return `https://duckduckgo.com/${encodedWord}`
+        case "Google": return `https://google.com/search?q=${encodedWord}`;
         case "Bing": return `https://www.bing.com/search?q=${encodedWord}`;
         case "Baidu": return `https://www.baidu.com/s?wd=${encodedWord}`;
     }
@@ -188,6 +189,8 @@ async function getWvContent(manually: boolean): Promise<string> {
         console.log("final link: ", link);
     } else {
         link = getSearchEnginePath(word);
+        vscode.env.openExternal(vscode.Uri.parse(link));
+        throw new Error("");
     }
     return `
 <!DOCTYPE html>
@@ -212,7 +215,7 @@ async function getWvContent(manually: boolean): Promise<string> {
       </style>
 </head>
 <body>    
-<iframe src="${link}" width="100%" height="100%" ></iframe>
+<iframe src="${link}" width="100%" height="100%"></iframe>
 </body>
 </html>`;
 }
