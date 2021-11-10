@@ -2,6 +2,8 @@ import * as vscode from 'vscode';
 import fetch from 'node-fetch';
 import xml2js = require('xml2js');
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 import linkMap from './linkmap.json';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -138,19 +140,11 @@ async function getPathBySearch(word: string): Promise<string> {
     };
     vscode.window.setStatusBarMessage("Searching cppreference.com...");
     let result: PageInfo[] = [];
-    await fetch(`https://en.cppreference.com/mwiki/api.php?action=query&list=search&srsearch=${encodeURI(word)}&format=xml&srlimit=50&srprop=titlesnippet`)
-        .then(response => response.text())
-        .then(str => new Promise(
-            (resolve) => (new xml2js.Parser())
-                .parseString(str, (err, res) => {
-                    resolve(res);
-                }
-                ))
-        ).then(json => {
+    await fetch(`https://en.cppreference.com/mwiki/api.php?action=query&list=search&srsearch=${encodeURI(word)}&format=json&srlimit=50&srprop=titlesnippet`)
+        .then(response => response.json())
+        .then(json => {
             console.log(json);
-            let rawArr: { $: PageInfo }[] = json['api']['query'][0]['search'][0]['p'];
-            if (typeof rawArr !== "undefined")
-                result = rawArr.map(i => i.$);
+            result = json['query']['search'];
         })
     vscode.window.setStatusBarMessage("");
     if (result.length == 1) {

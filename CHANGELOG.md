@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.7
+*2020.11.11*
+- Fix [#3](https://github.com/Guyutongxue/VSC_CppReference/issues/3).
+
 ## 0.1.6
 
 *2020.6.19*
