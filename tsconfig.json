@@ -8,8 +8,8 @@
             "dom"
         ],
         "esModuleInterop": true,
-        "resolveJsonModule": true,
         "sourceMap": true,
+        "strictNullChecks": true,
         "rootDir": "src"
     },
     "exclude": [

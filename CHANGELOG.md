@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 0.2.0
+*2022.?.?*
+
+It seems that the search API of cppreference.com is no longer updated. Therefore, in this release, we have removed the online search functionality; in the meantime, we have significantly enhanced the local search functionality.
+
+The local search index is manually or programmatically crawled from the relevant pages of cppreference.com. The local index includes standard library symbols, macro symbols, preprocessed tokens, keywords, and standard attributes, and is kept as up-to-date as possible. If you find something missing, you can start an issue to let me know.
+
 ## 0.1.7
 *2020.11.11*
 - Fix [#3](https://github.com/Guyutongxue/VSC_CppReference/issues/3).

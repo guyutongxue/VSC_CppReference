@@ -2,7 +2,7 @@
     "name": "cpp-reference",
     "displayName": "Cpp Reference",
     "description": "View CppReference.com in VS Code",
-    "version": "0.1.7",
+    "version": "0.2.0",
     "publisher": "Guyutongxue",
     "author": {
         "name": "Guyutongxue",
@@ -10,7 +10,8 @@
         "email": "guyutongxue@163.com"
     },
     "engines": {
-        "vscode": "^1.48.0"
+        "vscode": "^1.69.0",
+        "node": ">= 16.15.0"
     },
     "icon": "img/logo.png",
     "repository": {
@@ -85,11 +86,6 @@
                         "default": "en",
                         "description": "Choose the language of online version cppreference.com."
                     },
-                    "cppref.useSearch": {
-                        "type": "boolean",
-                        "default": true,
-                        "description": "Use searching on cppreference.com. If you disable this, you will get result by pre-generated symbol list which may be incomplet and incorrekt."
-                    },
                     "cppref.alternative.enabled": {
                         "type": "boolean",
                         "title": "Enable alternative version",
@@ -121,21 +117,14 @@
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
         "compile": "tsc -p ./",
-        "watch": "tsc -w -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install"
+        "watch": "tsc -w -p ./"
     },
     "dependencies": {
-        "cors": "^2.8.5",
-        "node-fetch": "^2.6.0",
-        "xml2js": "^0.4.23",
-        "xmlhttprequest": "^1.8.0"
+        "fuse.js": "^6.6.2"
     },
     "devDependencies": {
-        "@types/node-fetch": "^2.5.7",
-        "@types/xml2js": "^0.4.5",
-        "vscode": "^1.1.29",
-        "@types/node": "^10.5.2",
-        "tslint": "^5.11.0",
-        "typescript": "^2.9.2"
+        "@types/node": "^18.0.3",
+        "@types/vscode": "^1.69.0",
+        "typescript": "^4.5.0"
     }
 }

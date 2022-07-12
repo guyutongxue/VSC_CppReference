@@ -14,21 +14,14 @@ Set your cursor position onto the word you want search for, then press <kbd>Ctrl
 
 You can also search manually by opening Command Palette (<kbd>Ctrl+Shift+P</kbd>, <kbd>Command+Shift+P</kbd>) and execute command `Cpp Reference: Search manually`.
 
-> Only the first 50 search results will be displayed.
->
-> **Issue:** Pages about C language cannot be searched, because cppreference.com doesn't provide their search API.
+> **Warning**
+> Only pages in "C++" part (not "C" part) will be indexed and shown in search results.
 
 ## Settings
 
 ### `cppref.lang`
 
 Choose the language of online version cppreference.com. For example, use `zh` for Chinese version of [cppreference.com](https://zh.cppreference.com).
-
-### `cppref.useSearch`
-
-By default, this extension will try to execute searching on cppreference.com, and return the search result for you. But it may takes a long time when your Internet connection is not so well.
-
-If you set this value to `false`, you will get result by pre-generated symbol list (from [here](https://en.cppreference.com/w/cpp/symbol_index)) which may be incomplet and incorrekt. Here, you can only search `std::` names and macros, so you will get fewer result, which may be convenient in some cases.
 
 ### `cppref.alternative.enabled`
 
@@ -37,3 +30,7 @@ Switch this on to use an alternative version of cppreference.com. You should inp
 ### `cppref.alternative.url`
 
 The base URL for alternative version of cppreference.com. For example, `https://guyutongxue.gitee.io/cppref/zh/` is easier to visit for some Chinese users.
+
+## About indexing
+
+Repo [Guyutongxue/cppreference-index](https://github.com/Guyutongxue/cppreference-index) stores code for generating search index.
