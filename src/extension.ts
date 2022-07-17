@@ -112,22 +112,37 @@ async function getPath(word: string): Promise<string | null> {
   const icon = (x: Index) => {
     switch (x.type) {
       case "symbol": {
-        if (x.symbolType === "macro" || x.symbolType === "functionLikeMacro") {
-          return "symbol-constant";
+        switch (x.symbolType) {
+          case "function":
+          case "functionTemplate":
+          case "niebloid":
+            return "symbol-method";
+          case "constant":
+          case "variableTemplate":
+            return "symbol-constant";
+          case "macro":
+          case "functionLikeMacro":
+            return "symbol-numeric";
+          case "class":
+          case "classTemplate":
+          case "classTemplateSpecialization":
+            return "symbol-class";
+          case "enumeration":
+            return "symbol-enum";
+          case "enumerator":
+            return "symbol-enum-member";
+          case "object":
+            return "symbol-variable";
+          case "namespace":
+            return "symbol-namespace";
+          case "concept":
+            return "symbol-boolean";
+          case "typeAlias":
+          case "typeAliasTemplate":
+            return "symbol-interface";
+          default:
+            return "symbol-misc";
         }
-        if (
-          x.symbolType === "function" ||
-          x.symbolType === "functionTemplate"
-        ) {
-          return "symbol-method";
-        }
-        if (x.symbolType === "namespace") {
-          return "symbol-namespace";
-        }
-        if (x.symbolType === "template") {
-          return "symbol-class";
-        }
-        return "symbol-variable";
       }
       case "attribute":
         return "symbol-property";
@@ -142,7 +157,10 @@ async function getPath(word: string): Promise<string | null> {
   const description = (x: Index) => {
     switch (x.type) {
       case "symbol":
-        return x.description;
+        if (x.description) return x.description;
+        else if (x.symbolType === "macro" && x.name.startsWith("__cpp_"))
+          return "[Feature Test Macro]";
+        else return " ";
       case "attribute":
         return `[Attribute]`;
       case "header":
@@ -167,7 +185,8 @@ async function getPath(word: string): Promise<string | null> {
       [
         ...filtered.map<MyItem>((e, i) => ({
           label: `$(${icon(e)}) ${e.name}`,
-          description: description(e),
+          description: "note" in e ? e.note : undefined,
+          detail: description(e),
           index: i,
         })),
         {

@@ -12,15 +12,28 @@ interface IndexBase<Type extends string> {
   marks: Marks;
 }
 
+export type DetailedSymbolType =
+  | "concept"
+  | "class"
+  | "classTemplate"
+  | "classTemplateSpecialization"
+  | "typeAlias"
+  | "typeAliasTemplate"
+  | "function"
+  | "functionTemplate"
+  | "enumeration"
+  | "enumerator"
+  | "macro"
+  | "functionLikeMacro"
+  | "constant"
+  | "niebloid"
+  | "object"
+  | "variableTemplate"
+  | "namespace"
+  | "other";
 export interface SymbolIndex extends IndexBase<"symbol"> {
-  symbolType:
-    | "macro"
-    | "functionLikeMacro"
-    | "function"
-    | "template"
-    | "functionTemplate"
-    | "namespace"
-    | "other";
+  symbolType: DetailedSymbolType;
+  note?: string;
   description?: string;
 }
 export interface HeaderIndex extends IndexBase<"header"> {
