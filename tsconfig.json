@@ -1,11 +1,10 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
-        "target": "es6",
+        "module": "node16",
+        "target": "ESNext",
         "outDir": "out",
         "lib": [
-            "es6",
-            "dom"
+            "ESNext",
         ],
         "esModuleInterop": true,
         "sourceMap": true,

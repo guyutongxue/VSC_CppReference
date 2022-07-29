@@ -2,6 +2,7 @@ import * as vscode from "vscode";
 import type { Index } from "./typing";
 import * as fs from "node:fs";
 import * as path from "node:path";
+const fetch = import("node-fetch");
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
@@ -49,10 +50,34 @@ export function activate(context: vscode.ExtensionContext) {
   const search = vscode.commands.registerCommand("cppref.search", () => {
     main(true);
   });
-  data = JSON.parse(
-    fs.readFileSync(path.join(__dirname, "../linkmap.json"), "utf-8")
+  const updateIndex = vscode.commands.registerCommand(
+    "cppref.updateIndex",
+    () => {
+      vscode.window.withProgress({
+        location: vscode.ProgressLocation.Notification,
+        title: "Fetching latest index from cdn.jsdelivr.net...",
+      }, async (progress) => {
+        try {
+          data = await (await fetch).default(
+            `https://cdn.jsdelivr.net/npm/@gytx/cppreference-index@latest/dist/generated.json`
+          ).then((r) => r.json() as Promise<Index[]>);
+          context.globalState.update("data", data);
+        } catch (err) {
+          vscode.window.showErrorMessage(err.message);
+        }
+      })
+    }
   );
-  context.subscriptions.push(open, search);
+  context.subscriptions.push(open, search, updateIndex);
+  const storedData = context.globalState.get<Index[]>("data");
+  if (!storedData) {
+    data = JSON.parse(
+      fs.readFileSync(path.join(__dirname, "../linkmap.json"), "utf-8")
+    );
+    context.globalState.update("data", data);
+  } else {
+    data = storedData;
+  }
 }
 
 function getLink(): string {
@@ -80,14 +105,6 @@ function getCurrentWord(): string {
   } else {
     throw new Error("No identifier found.");
   }
-}
-
-async function searchManually(): Promise<string> {
-  const word = await vscode.window.showInputBox({
-    prompt: "Type what you want to search",
-  });
-  if (typeof word === "undefined") throw new Error("");
-  else return word;
 }
 
 function getSearchEnginePath(word: string) {
@@ -210,7 +227,7 @@ async function getWvContent(manually: boolean): Promise<string> {
   let path: string | null;
   console.log("host: ", host);
   let link: string;
-  const word = manually ? await searchManually() : getCurrentWord();
+  const word = manually ? "" : getCurrentWord();
   console.log("word: ", word);
   path = await getPath(word);
   if (path !== null) {

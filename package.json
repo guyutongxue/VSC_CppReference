@@ -50,6 +50,11 @@
                 "command": "cppref.search",
                 "title": "Search manually",
                 "category": "Cpp Reference"
+            },
+            {
+                "command": "cppref.updateIndex",
+                "title": "Update cppreference.com Search index",
+                "category": "Cpp Reference"
             }
         ],
         "keybindings": [
@@ -120,7 +125,8 @@
         "watch": "tsc -w -p ./"
     },
     "dependencies": {
-        "fuse.js": "^6.6.2"
+        "fuse.js": "^6.6.2",
+        "node-fetch": "^3.2.8"
     },
     "devDependencies": {
         "@types/node": "^18.0.3",
