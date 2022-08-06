@@ -1,18 +1,19 @@
 {
-    "compilerOptions": {
-        "module": "node16",
-        "target": "ESNext",
-        "outDir": "out",
-        "lib": [
-            "ESNext",
-        ],
-        "esModuleInterop": true,
-        "sourceMap": true,
-        "strictNullChecks": true,
-        "rootDir": "src"
-    },
-    "exclude": [
-        "out",
-        ".vscode-test"
-    ]
+  "compilerOptions": {
+    "module": "NodeNext",
+    "target": "ESNext",
+    "outDir": "out",
+    "lib": [
+      "ESNext",
+    ],
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "rootDir": "src"
+  },
+  "exclude": [
+    "out",
+    ".vscode-test"
+  ]
 }

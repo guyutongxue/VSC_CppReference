@@ -1,136 +1,137 @@
 {
-    "name": "cpp-reference",
-    "displayName": "Cpp Reference",
-    "description": "View CppReference.com in VS Code",
-    "version": "0.2.1",
-    "publisher": "Guyutongxue",
-    "author": {
-        "name": "Guyutongxue",
-        "url": "https://guyutongxue.github.io",
-        "email": "guyutongxue@163.com"
-    },
-    "engines": {
-        "vscode": "^1.69.0",
-        "node": ">= 16.15.0"
-    },
-    "icon": "img/logo.png",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Guyutongxue/VSC_CppReference.git"
-    },
-    "categories": [
-        "Other",
-        "Programming Languages"
+  "name": "cpp-reference",
+  "displayName": "Cpp Reference",
+  "description": "View CppReference.com in VS Code",
+  "version": "0.2.1",
+  "publisher": "Guyutongxue",
+  "author": {
+    "name": "Guyutongxue",
+    "url": "https://guyutongxue.github.io",
+    "email": "guyutongxue@163.com"
+  },
+  "engines": {
+    "vscode": "^1.69.0",
+    "node": ">= 16.15.0"
+  },
+  "icon": "img/logo.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Guyutongxue/VSC_CppReference.git"
+  },
+  "categories": [
+    "Other",
+    "Programming Languages"
+  ],
+  "keywords": [
+    "cpp",
+    "c++",
+    "cppreference",
+    "search",
+    "documentation",
+    "docs",
+    "devdocs",
+    "reference"
+  ],
+  "activationEvents": [
+    "onCommand:cppref.open",
+    "onCommand:cppref.search",
+    "onWebviewPanel:docs",
+    "onLanguage:cpp"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cppref.open",
+        "title": "View for the current word",
+        "category": "Cpp Reference"
+      },
+      {
+        "command": "cppref.search",
+        "title": "Search manually",
+        "category": "Cpp Reference"
+      },
+      {
+        "command": "cppref.updateIndex",
+        "title": "Update cppreference.com Search index",
+        "category": "Cpp Reference"
+      }
     ],
-    "keywords": [
-        "cpp",
-        "c++",
-        "cppreference",
-        "search",
-        "documentation",
-        "docs",
-        "devdocs",
-        "reference"
+    "keybindings": [
+      {
+        "command": "cppref.open",
+        "key": "ctrl+shift+A",
+        "mac": "cmd+shift+A",
+        "when": "editorTextFocus"
+      }
     ],
-    "activationEvents": [
-        "onCommand:cppref.open",
-        "onCommand:cppref.search",
-        "onWebviewPanel:docs",
-        "onLanguage:cpp"
-    ],
-    "main": "./out/extension.js",
-    "contributes": {
-        "commands": [
-            {
-                "command": "cppref.open",
-                "title": "View for the current word",
-                "category": "Cpp Reference"
-            },
-            {
-                "command": "cppref.search",
-                "title": "Search manually",
-                "category": "Cpp Reference"
-            },
-            {
-                "command": "cppref.updateIndex",
-                "title": "Update cppreference.com Search index",
-                "category": "Cpp Reference"
-            }
-        ],
-        "keybindings": [
-            {
-                "command": "cppref.open",
-                "key": "ctrl+shift+A",
-                "mac": "cmd+shift+A",
-                "when": "editorTextFocus"
-            }
-        ],
-        "configuration": [
-            {
-                "title": "Cpp Reference",
-                "properties": {
-                    "cppref.lang": {
-                        "type": "string",
-                        "title": "Language",
-                        "enum": [
-                            "en",
-                            "zh",
-                            "ru",
-                            "ar",
-                            "cs",
-                            "de",
-                            "fr",
-                            "it",
-                            "ja",
-                            "ko",
-                            "pl",
-                            "pt",
-                            "tr",
-                            "es"
-                        ],
-                        "default": "en",
-                        "description": "Choose the language of online version cppreference.com."
-                    },
-                    "cppref.alternative.enabled": {
-                        "type": "boolean",
-                        "title": "Enable alternative version",
-                        "default": false,
-                        "description": "If you prefer an alternative version of cppreference.com, switch this on."
-                    },
-                    "cppref.alternative.url": {
-                        "type": "string",
-                        "title": "Alternative URL",
-                        "description": "Write your alternative cppreference.com base URL here, like `https://guyutongxue.gitee.io/cppref/zh/`.",
-                        "default": ""
-                    },
-                    "cppref.searchEngine": {
-                        "type": "string",
-                        "title": "Search engine",
-                        "description": "Use which search engine when no result matches your query word.",
-                        "enum": [
-                            "Google",
-                            "Bing",
-                            "DuckDuckGo",
-                            "Baidu"
-                        ],
-                        "default": "Bing"
-                    }
-                }
-            }
-        ]
-    },
-    "scripts": {
-        "vscode:prepublish": "tsc -p ./",
-        "compile": "tsc -p ./",
-        "watch": "tsc -w -p ./"
-    },
-    "dependencies": {
-        "fuse.js": "^6.6.2",
-        "node-fetch": "^3.2.8"
-    },
-    "devDependencies": {
-        "@types/node": "^18.0.3",
-        "@types/vscode": "^1.69.0",
-        "typescript": "^4.5.0"
-    }
+    "configuration": [
+      {
+        "title": "Cpp Reference",
+        "properties": {
+          "cppref.lang": {
+            "type": "string",
+            "title": "Language",
+            "enum": [
+              "en",
+              "zh",
+              "ru",
+              "ar",
+              "cs",
+              "de",
+              "fr",
+              "it",
+              "ja",
+              "ko",
+              "pl",
+              "pt",
+              "tr",
+              "es"
+            ],
+            "default": "en",
+            "description": "Choose the language of online version cppreference.com."
+          },
+          "cppref.alternative.enabled": {
+            "type": "boolean",
+            "title": "Enable alternative version",
+            "default": false,
+            "description": "If you prefer an alternative version of cppreference.com, switch this on."
+          },
+          "cppref.alternative.url": {
+            "type": "string",
+            "title": "Alternative URL",
+            "description": "Write your alternative cppreference.com base URL here, like `https://guyutongxue.gitee.io/cppref/zh/`.",
+            "default": ""
+          },
+          "cppref.searchEngine": {
+            "type": "string",
+            "title": "Search engine",
+            "description": "Use which search engine when no result matches your query word.",
+            "enum": [
+              "Google",
+              "Bing",
+              "DuckDuckGo",
+              "Baidu"
+            ],
+            "default": "Bing"
+          }
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "tsc -p ./",
+    "compile": "tsc -p ./",
+    "watch": "tsc -w -p ./"
+  },
+  "dependencies": {
+    "@gytx/cppreference-index": "^0.1.6",
+    "fuse.js": "^6.6.2",
+    "node-fetch": "^3.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.3",
+    "@types/vscode": "^1.69.0",
+    "typescript": "^4.5.0"
+  }
 }
