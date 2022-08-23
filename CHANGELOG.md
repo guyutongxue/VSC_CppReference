@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.2.2
+*2022.8.22*
+- Add "refresh index" feature.
+- Some dev-optimizations.
+
 ## 0.2.1
 *2022.7.17*
 - Provide detailed symbol information while searching.

@@ -1,0 +1,6 @@
+**/*.ts
+**/*.vsix
+**/tsconfig.json
+.gitgnore
+.editorconfig
+node_modules

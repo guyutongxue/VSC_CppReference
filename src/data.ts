@@ -62,12 +62,7 @@ export async function initData(context: vscode.ExtensionContext) {
   await vscode.workspace.fs.createDirectory(context.globalStorageUri);
   const storagePath = getStoragePath(context);
   if (!fs.existsSync(storagePath.fsPath)) {
-    const bundled = vscode.Uri.file(
-      path.join(
-        __dirname,
-        "../node_modules/@gytx/cppreference-index/dist/generated.json"
-      )
-    );
+    const bundled = vscode.Uri.file(path.join(__dirname, "./generated.json"));
     vscode.workspace.fs.copy(bundled, storagePath);
   }
   const content = await vscode.workspace.fs.readFile(storagePath);

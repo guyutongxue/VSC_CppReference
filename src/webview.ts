@@ -1,6 +1,4 @@
 import vscode from "vscode";
-import { join } from "path";
-import { readFileSync } from "fs";
 
 import { getLink, getSearchEnginePath } from "./settings";
 import { getPath } from "./data";
