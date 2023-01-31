@@ -30,3 +30,7 @@ export function getSearchEnginePath(word: string) {
       return `https://www.baidu.com/s?wd=${encodedWord}`;
   }
 }
+
+export function shouldInvert() {
+  return vscode.workspace.getConfiguration("cppref").get("invertColorInDarkTheme", false);
+}

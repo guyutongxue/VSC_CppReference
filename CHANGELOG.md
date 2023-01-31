@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.2.3
+*2023.1.31*
+- Add a new option "Invert color in dark theme", for experimental dark theme support.
+
 ## 0.2.2
 *2022.8.22*
 - Add "refresh index" feature.

@@ -29,6 +29,12 @@
 
 配置您想使用的其它版本的 cppreference.com 的基 URL，如 `https://guyutongxue.gitee.io/cppref/zh/` （这在中国大陆地区访问较快）。
 
+### `cppref.invertColorInDarkTheme`
+
+当 VS Code 使用暗色主题或暗色高对比度主题时，翻转页面颜色。
+
+**警告** 此功能使用 CSS filter 实现，可能导致文本边缘更尖锐从而影响文本阅读。
+
 ## 关于搜索索引
 
 仓库 [Guyutongxue/cppreference-index](https://github.com/Guyutongxue/cppreference-index) 存储生成搜索索引的相关代码。

@@ -2,7 +2,7 @@
   "name": "cpp-reference",
   "displayName": "Cpp Reference",
   "description": "View CppReference.com in VS Code",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "publisher": "Guyutongxue",
   "author": {
     "name": "Guyutongxue",
@@ -102,7 +102,7 @@
           "cppref.alternative.url": {
             "type": "string",
             "title": "Alternative URL",
-            "description": "Write your alternative cppreference.com base URL here, like `https://guyutongxue.gitee.io/cppref/zh/`.",
+            "markdownDescription": "Write your alternative cppreference.com base URL here, like `https://guyutongxue.gitee.io/cppref/zh/`.",
             "default": ""
           },
           "cppref.searchEngine": {
@@ -116,6 +116,11 @@
               "Baidu"
             ],
             "default": "Bing"
+          },
+          "cppref.invertColorInDarkTheme": {
+            "type": "boolean",
+            "title": "Invert color in dark theme",
+            "markdownDescription": "When using vscode's Dark Theme or Dark High Contrast Theme, invert the page's color. \n\n**Warning**: This feature is implemented using CSS filter and may result in sharper text edges, making it difficult to read."
           }
         }
       }

@@ -31,6 +31,12 @@ Switch this on to use an alternative version of cppreference.com. You should inp
 
 The base URL for alternative version of cppreference.com. For example, `https://guyutongxue.gitee.io/cppref/zh/` is easier to visit for some Chinese users.
 
+### `cppref.invertColorInDarkTheme`
+
+When using vscode's Dark Theme or Dark High Contrast Theme, invert the page's color. 
+
+**Warning**: This feature is implemented using CSS filter and may result in sharper text edges, making it difficult to read.
+
 ## About indexing
 
 Repo [Guyutongxue/cppreference-index](https://github.com/Guyutongxue/cppreference-index) stores code for generating search index.
