@@ -2,7 +2,7 @@
   "name": "cpp-reference",
   "displayName": "Cpp Reference",
   "description": "View CppReference.com in VS Code",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "publisher": "Guyutongxue",
   "author": {
     "name": "Guyutongxue",
@@ -10,7 +10,7 @@
     "email": "guyutongxue@163.com"
   },
   "engines": {
-    "vscode": "^1.69.0",
+    "vscode": "^1.75.0",
     "node": ">= 16.15.0"
   },
   "icon": "img/logo.png",
@@ -33,9 +33,6 @@
     "reference"
   ],
   "activationEvents": [
-    "onCommand:cppref.open",
-    "onCommand:cppref.search",
-    "onCommand:cppref.updateIndex",
     "onWebviewPanel:docs",
     "onLanguage:cpp",
     "onLanguage:c"
@@ -136,13 +133,14 @@
     "watch": "tsc -w -p ./"
   },
   "dependencies": {
-    "@gytx/cppreference-index": "^0.1.6",
+    "@gytx/cppreference-index": "^0.1.15",
     "fuse.js": "^6.6.2",
     "node-fetch": "^3.2.8"
   },
   "devDependencies": {
     "@types/node": "^18.0.3",
     "@types/vscode": "^1.69.0",
+    "@vscode/vsce": "^2.31.1",
     "copyfiles": "^2.4.1",
     "esbuild": "^0.15.5",
     "typescript": "^4.5.0"

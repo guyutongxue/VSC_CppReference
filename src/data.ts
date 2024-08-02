@@ -6,10 +6,13 @@ import { Index } from "./typing";
 import { getIcon, getDescription, UserCancelledError } from "./utils";
 import { fetch } from "./fetch";
 
-let data: Index[];
+let data: Index[] | null = null;
 
-export async function getPath(word: string): Promise<string | null> {
+export async function getPath(context: vscode.ExtensionContext, word: string): Promise<string | null> {
   let path: string | null = "about:blank";
+  if (data === null) {
+    data = await initData(context);
+  }
   const filtered = data
     .filter((i) => i.name.includes(word))
     .sort((a, b) => a.name.length - b.name.length);
@@ -58,7 +61,7 @@ export async function updateData(context: vscode.ExtensionContext) {
   data = JSON.parse(textDecoder.decode(content));
 }
 
-export async function initData(context: vscode.ExtensionContext) {
+async function initData(context: vscode.ExtensionContext): Promise<Index[]> {
   await vscode.workspace.fs.createDirectory(context.globalStorageUri);
   const storagePath = getStoragePath(context);
   if (!fs.existsSync(storagePath.fsPath)) {
@@ -66,5 +69,5 @@ export async function initData(context: vscode.ExtensionContext) {
     vscode.workspace.fs.copy(bundled, storagePath);
   }
   const content = await vscode.workspace.fs.readFile(storagePath);
-  data = JSON.parse(textDecoder.decode(content));
+  return JSON.parse(textDecoder.decode(content));
 }

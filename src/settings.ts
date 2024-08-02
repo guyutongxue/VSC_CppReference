@@ -5,7 +5,7 @@ export function getLink(path: string): string {
     .getConfiguration("cppref.alternative")
     .get("enabled");
   if (alternative) {
-    const url = vscode.workspace.getConfiguration("cppref.alternative").get("url")!;
+    let url: string = vscode.workspace.getConfiguration("cppref.alternative").get("url")!;
     return url + path;
   } else {
     const lang: string = vscode.workspace.getConfiguration("cppref").get("lang")!;

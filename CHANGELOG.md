@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.2.4
+*2024.8.2*
+- Update default index to C++23 and partial C++26.
+- Fix [#6](https://github.com/guyutongxue/VSC_CppReference/issues/6).
+
 ## 0.2.3
 *2023.1.31*
 - Add a new option "Invert color in dark theme", for experimental dark theme support.

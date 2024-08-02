@@ -1,14 +1,13 @@
 import * as vscode from "vscode";
 
-import { getWvContent } from "./webview";
-import { initData, updateData } from "./data";
+import { setWvContent } from "./webview";
+import { updateData } from "./data";
 import { UserCancelledError } from "./utils";
 
 export function activate(context: vscode.ExtensionContext) {
   let wvPanel: vscode.WebviewPanel | undefined = undefined;
   async function main(manually: boolean): Promise<void> {
     try {
-      const content: string = await getWvContent(manually);
       if (wvPanel) {
         wvPanel.reveal(vscode.ViewColumn.Beside);
       } else {
@@ -23,6 +22,7 @@ export function activate(context: vscode.ExtensionContext) {
             enableScripts: true,
             enableFindWidget: true,
             retainContextWhenHidden: true,
+            localResourceRoots: [vscode.Uri.parse("file:///")]
           }
         );
         wvPanel.onDidDispose(
@@ -33,7 +33,7 @@ export function activate(context: vscode.ExtensionContext) {
           context.subscriptions
         );
       }
-      wvPanel.webview.html = content;
+      await setWvContent(context, wvPanel.webview, manually);
     } catch (error) {
       if (error instanceof Error) {
         if (!(error instanceof UserCancelledError))
@@ -66,5 +66,4 @@ export function activate(context: vscode.ExtensionContext) {
     }
   );
   context.subscriptions.push(open, search, updateIndex);
-  initData(context);
 }

@@ -20,16 +20,20 @@ function getCurrentWord(): string {
   }
 }
 
-export async function getWvContent(manually: boolean): Promise<string> {
+export async function setWvContent(context: vscode.ExtensionContext, webview: vscode.Webview, manually: boolean): Promise<void> {
   const word = manually ? "" : getCurrentWord();
-  const path = await getPath(word);
+  const path = await getPath(context, word);
   if (path === null) {
     vscode.env.openExternal(vscode.Uri.parse(getSearchEnginePath(word)));
     throw new UserCancelledError();
   }
-  const link = getLink(path);
+  let uri = vscode.Uri.parse(getLink(path));
+  if (uri.scheme === "file") {
+    uri = webview.asWebviewUri(vscode.Uri.file(uri.fsPath + ".html"));
+  }
+  console.log(uri);
   const invertColor = shouldInvert();
-  return `<!DOCTYPE html>
+  webview.html = `<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>C++ Reference</title>
@@ -56,5 +60,5 @@ export async function getWvContent(manually: boolean): Promise<string> {
     border: 0px;
   }
 </style> 
-<iframe src="${link}" width="100%" height="100%"></iframe>`;
+<iframe src="${uri}" width="100%" height="100%"></iframe>`;
 }
