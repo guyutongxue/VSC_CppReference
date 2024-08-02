@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 
-import { setWvContent } from "./webview";
+import { getWvUri, setWvContent } from "./webview";
 import { updateData } from "./data";
 import { UserCancelledError } from "./utils";
 
@@ -8,6 +8,7 @@ export function activate(context: vscode.ExtensionContext) {
   let wvPanel: vscode.WebviewPanel | undefined = undefined;
   async function main(manually: boolean): Promise<void> {
     try {
+      const uri = await getWvUri(context, manually);
       if (wvPanel) {
         wvPanel.reveal(vscode.ViewColumn.Beside);
       } else {
@@ -33,7 +34,7 @@ export function activate(context: vscode.ExtensionContext) {
           context.subscriptions
         );
       }
-      await setWvContent(context, wvPanel.webview, manually);
+      await setWvContent(wvPanel.webview, uri);
     } catch (error) {
       if (error instanceof Error) {
         if (!(error instanceof UserCancelledError))

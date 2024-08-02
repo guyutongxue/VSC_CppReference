@@ -20,18 +20,20 @@ function getCurrentWord(): string {
   }
 }
 
-export async function setWvContent(context: vscode.ExtensionContext, webview: vscode.Webview, manually: boolean): Promise<void> {
+export async function getWvUri(context: vscode.ExtensionContext, manually: boolean): Promise<vscode.Uri> {
   const word = manually ? "" : getCurrentWord();
   const path = await getPath(context, word);
   if (path === null) {
     vscode.env.openExternal(vscode.Uri.parse(getSearchEnginePath(word)));
     throw new UserCancelledError();
   }
-  let uri = vscode.Uri.parse(getLink(path));
+  return vscode.Uri.parse(getLink(path));
+}
+
+export async function setWvContent(webview: vscode.Webview, uri: vscode.Uri): Promise<void> {
   if (uri.scheme === "file") {
     uri = webview.asWebviewUri(vscode.Uri.file(uri.fsPath + ".html"));
   }
-  console.log(uri);
   const invertColor = shouldInvert();
   webview.html = `<!DOCTYPE html>
 <meta charset="UTF-8">

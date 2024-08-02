@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.2.4
+## 0.2.5, 0.2.4
 *2024.8.2*
 - Update default index to C++23 and partial C++26.
 - Fix [#6](https://github.com/guyutongxue/VSC_CppReference/issues/6).
