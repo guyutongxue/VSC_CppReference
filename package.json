@@ -118,6 +118,12 @@
             "type": "boolean",
             "title": "Invert color in dark theme",
             "markdownDescription": "When using vscode's Dark Theme or Dark High Contrast Theme, invert the page's color. \n\n**Warning**: This feature is implemented using CSS filter and may result in sharper text edges, making it difficult to read."
+          },
+          "cppref.darkMode": {
+            "type": "boolean",
+            "title": "Enable Dark Mode",
+            "default": true,
+            "description": "Apply dark mode to cppreference.com content."
           }
         }
       }
@@ -135,6 +141,7 @@
   "dependencies": {
     "@gytx/cppreference-index": "^0.1.15",
     "fuse.js": "^6.6.2",
+    "i": "^0.3.7",
     "node-fetch": "^3.2.8"
   },
   "devDependencies": {
