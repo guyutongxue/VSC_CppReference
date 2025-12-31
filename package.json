@@ -141,7 +141,6 @@
   "dependencies": {
     "@gytx/cppreference-index": "^0.1.15",
     "fuse.js": "^6.6.2",
-    "i": "^0.3.7",
     "node-fetch": "^3.2.8"
   },
   "devDependencies": {
