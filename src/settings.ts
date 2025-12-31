@@ -34,3 +34,7 @@ export function getSearchEnginePath(word: string) {
 export function shouldInvert() {
   return vscode.workspace.getConfiguration("cppref").get("invertColorInDarkTheme", false);
 }
+
+export function isDarkModeEnabled() {
+  return vscode.workspace.getConfiguration("cppref").get("darkMode", true);
+}
